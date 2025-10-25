@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects and rewrites
+
+# Redirect common paths to index
+/home /
+/index /
+
+# 404 fallback
+/* /index.html 200
