@@ -139,14 +139,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add mobile-specific optimizations
         document.body.classList.add('mobile-device');
 
-        // Optimize video loading on mobile
+        // Enable video playback on mobile - use 'auto' for better loading
         if (videoElement) {
-            videoElement.preload = 'metadata';
+            videoElement.preload = 'auto';
+            videoElement.setAttribute('playsinline', 'true');
         }
 
-        // Optimize audio loading on mobile
+        // Enable audio playback on mobile - use 'auto' for better loading
         audioElements.forEach(audio => {
-            audio.preload = 'metadata';
+            audio.preload = 'auto';
         });
     }
 

@@ -12,14 +12,25 @@ const Analytics = {
         this.trackVisit();
     },
 
-    // Track site visit
+    // Track site visit (unique visitors only)
     trackVisit: function() {
+        // Check if this visitor has already been counted
+        const visitorTracked = localStorage.getItem('paz-visitor-tracked');
+
+        if (visitorTracked) {
+            console.log('Visitor already tracked (unique visitor)');
+            return; // Don't count again
+        }
+
+        // This is a new unique visitor - track them
         const url = `${this.API_BASE}/hit/${this.VISITORS_KEY}`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                console.log('Site visit tracked:', data.value);
+                console.log('New unique visitor tracked:', data.value);
+                // Mark this visitor as tracked
+                localStorage.setItem('paz-visitor-tracked', 'true');
             })
             .catch(error => {
                 console.error('Error tracking visit:', error);
