@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
         audio.addEventListener('play', function() {
             this.parentElement.style.borderRight = '4px solid var(--accent-gold)';
             this.parentElement.style.backgroundColor = '#2a2a2a';
+
+            // Track audio play in analytics
+            if (typeof Analytics !== 'undefined') {
+                Analytics.trackAudioPlay();
+            }
         });
 
         audio.addEventListener('pause', function() {
